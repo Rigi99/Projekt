@@ -93,3 +93,41 @@ bool jatekMenet(Palya* palya) {
 		system("CLS");
 	}
 }
+bool jatekMenetExtra(Palya* palya) {
+	int elozoX, elozoY;
+	int jatekosX = 1, jatekosY = 1;
+	palya->palya[jatekosX][jatekosY] = 'P';
+	while (1) {
+		kirajzolPalya(palya);
+		printf("Jobb: d\nLe: s\nBal: a\nFel: w\n");
+		char option = getch();
+		elozoX = jatekosX;
+		elozoY = jatekosY;
+		if (option == 'd') {
+			jatekosY++;
+		}
+		if (option == 's') {
+			jatekosX++;
+		}
+		if (option == 'a') {
+			--jatekosY;
+		}
+		if (option == 'w') {
+			--jatekosX;
+		}
+		if (palya->palya[jatekosX][jatekosY] == '0') {
+			palya->palya[jatekosX][jatekosY] = 'P';
+			palya->palya[elozoX][elozoY] = '0';
+		}
+		if (palya->palya[jatekosX][jatekosY] == '1') {
+			return false;
+		}
+		if (palya->palya[jatekosX][jatekosY] == '2') {
+			return false;
+		}
+		if (palya->palya[jatekosX][jatekosY] == 'F') {
+			return true;
+		}
+		system("CLS");
+	}
+}

@@ -16,9 +16,9 @@ int main()
 		printf("Jatek vege!");
 		return -5;
 	}
-	if (jatekMenet(palya)) {
+	if (jatekMenetExtra(palya)) {
 		printf("Jatek teljesitve! Gratulalunk!");
-	}
+	}	
 	else {
 		printf("Jatek vege!");
 		return -5;

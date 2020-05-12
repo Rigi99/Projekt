@@ -16,4 +16,5 @@ typedef struct Palya {
 Palya* beolvasPalya(const char*);
 void kirajzolPalya(Palya*);
 bool jatekMenet(Palya*);
+bool jatekMenetExtra(Palya*);
 #endif
