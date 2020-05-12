@@ -8,10 +8,14 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <conio.h>
+#include <time.h>
 typedef struct Palya {
 	int szel;
 	int hossz;
 	char** palya;
+	int fegyver;
+	int bossX;
+	int bossY;
 }Palya;
 Palya* beolvasPalya(const char*);
 void kirajzolPalya(Palya*);

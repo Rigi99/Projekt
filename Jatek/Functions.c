@@ -53,15 +53,16 @@ void kirajzolPalya(Palya* palya) {
 		}
 		printf("\n");
 	}
-	//system("pause");
 }
 bool jatekMenet(Palya* palya) {
 	int elozoX, elozoY;
 	int jatekosX = 1, jatekosY = 1;
 	palya->palya[jatekosX][jatekosY] = 'P';
+	palya->fegyver = 0;
 	while (1) {
 		kirajzolPalya(palya);
 		printf("Jobb: d\nLe: s\nBal: a\nFel: w\n");
+		printf("Lovedekek szama: %i", palya->fegyver);
 		char option = getch();
 		elozoX = jatekosX;
 		elozoY = jatekosY;
@@ -87,19 +88,33 @@ bool jatekMenet(Palya* palya) {
 		if (palya->palya[jatekosX][jatekosY] == '2') {
 			return false;
 		}
+		if (palya->palya[jatekosX][jatekosY] == '3') {
+			return false;
+		}
 		if (palya->palya[jatekosX][jatekosY] == 'F') {
 			return true;
+		}
+		if (palya->palya[jatekosX][jatekosY] == 'G' || palya->palya[jatekosX][jatekosY] == 'l') {
+			++palya->fegyver;
+			palya->palya[jatekosX][jatekosY] = 'P';
+			palya->palya[elozoX][elozoY] = '0';
 		}
 		system("CLS");
 	}
 }
 bool jatekMenetExtra(Palya* palya) {
+	srand(time(NULL));
 	int elozoX, elozoY;
 	int jatekosX = 1, jatekosY = 1;
+	int bossX, bossY = palya->szel - 1;
+	int** lovedek[1][1];
+	int** boss[2][2];
 	palya->palya[jatekosX][jatekosY] = 'P';
+	palya->fegyver = 0;
 	while (1) {
 		kirajzolPalya(palya);
-		printf("Jobb: d\nLe: s\nBal: a\nFel: w\n");
+		printf("Jobb: d\nLe: s\nBal: a\nFel: w\nLoves: f\n");
+		printf("Lovedekek szama: %i", palya->fegyver);
 		char option = getch();
 		elozoX = jatekosX;
 		elozoY = jatekosY;
@@ -115,6 +130,14 @@ bool jatekMenetExtra(Palya* palya) {
 		if (option == 'w') {
 			--jatekosX;
 		}
+		if (option == "f") {
+			for (int i = jatekosY + 1; i < palya->szel; ++i) {
+				if (lovedek[jatekosX][jatekosY] == '0') {
+					palya->palya[jatekosX][jatekosY] = 'P';
+					palya->palya[elozoX][elozoY] = '0';
+				}
+			}
+		}
 		if (palya->palya[jatekosX][jatekosY] == '0') {
 			palya->palya[jatekosX][jatekosY] = 'P';
 			palya->palya[elozoX][elozoY] = '0';
@@ -125,8 +148,20 @@ bool jatekMenetExtra(Palya* palya) {
 		if (palya->palya[jatekosX][jatekosY] == '2') {
 			return false;
 		}
+		if (palya->palya[jatekosX][jatekosY] == '3') {
+			return false;
+		}
 		if (palya->palya[jatekosX][jatekosY] == 'F') {
 			return true;
+		}
+		if (palya->palya[jatekosX][jatekosY] == 'G' || palya->palya[jatekosX][jatekosY] == 'l') {
+			++palya->fegyver;
+			palya->palya[jatekosX][jatekosY] = 'P';
+			palya->palya[elozoX][elozoY] = '0';
+		}
+		//lovoldozes;
+		if (palya->fegyver == 0) {
+			return false;
 		}
 		system("CLS");
 	}

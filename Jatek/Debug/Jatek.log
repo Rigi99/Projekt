@@ -2,6 +2,9 @@
 C:\Users\Zsombor\Documents\GitHub\Projekt\Jatek\Functions.c(7,12): warning C4047: 'return': 'Palya *' differs in levels of indirection from 'int'
 C:\Users\Zsombor\Documents\GitHub\Projekt\Jatek\Functions.c(14,12): warning C4047: 'return': 'Palya *' differs in levels of indirection from 'int'
 C:\Users\Zsombor\Documents\GitHub\Projekt\Jatek\Functions.c(20,13): warning C4047: 'return': 'Palya *' differs in levels of indirection from 'int'
-  Main.c
-  Generating Code...
+C:\Users\Zsombor\Documents\GitHub\Projekt\Jatek\Functions.c(106,18): warning C4244: 'function': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Zsombor\Documents\GitHub\Projekt\Jatek\Functions.c(133,20): warning C4047: '==': 'int' differs in levels of indirection from 'char [2]'
+C:\Users\Zsombor\Documents\GitHub\Projekt\Jatek\Functions.c(135,43): warning C4047: '==': 'int **' differs in levels of indirection from 'int'
+C:\Users\Zsombor\Documents\GitHub\Projekt\Jatek\Functions.c(109,6): warning C4101: 'bossX': unreferenced local variable
+C:\Users\Zsombor\Documents\GitHub\Projekt\Jatek\Functions.c(111,8): warning C4101: 'boss': unreferenced local variable
   Jatek.vcxproj -> C:\Users\Zsombor\Documents\GitHub\Projekt\Jatek\Debug\Jatek.exe
