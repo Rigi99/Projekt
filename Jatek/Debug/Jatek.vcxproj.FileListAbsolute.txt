@@ -1,0 +1,2 @@
+C:\Users\Zsombor\Documents\GitHub\Projekt\Jatek\Debug\Jatek.exe
+C:\Users\Zsombor\Documents\GitHub\Projekt\Jatek\Debug\Jatek.pdb
