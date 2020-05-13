@@ -13,12 +13,16 @@ typedef struct Palya {
 	int szel;
 	int hossz;
 	char** palya;
+	char** golyo;
 	int fegyver;
+	int bossElet;
 	int bossX;
 	int bossY;
+	bool b;
 }Palya;
-Palya* beolvasPalya(const char*);
+Palya* createPalya(const char*);
+void beolvasPalya(const char*, char**);
 void kirajzolPalya(Palya*);
-bool jatekMenet(Palya*);
-bool jatekMenetExtra(Palya*);
+Palya* jatekMenet(Palya*);
+Palya* jatekMenetExtra(Palya*);
 #endif
