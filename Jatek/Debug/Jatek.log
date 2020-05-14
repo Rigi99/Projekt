@@ -1,6 +1,8 @@
 ﻿  Functions.c
 C:\Users\Zsombor\Documents\GitHub\Projekt\Jatek\Functions.c(7,12): warning C4047: 'return': 'Palya *' differs in levels of indirection from 'int'
-C:\Users\Zsombor\Documents\GitHub\Projekt\Jatek\Functions.c(15,12): warning C4047: 'return': 'Palya *' differs in levels of indirection from 'int'
-C:\Users\Zsombor\Documents\GitHub\Projekt\Jatek\Functions.c(22,13): warning C4047: 'return': 'Palya *' differs in levels of indirection from 'int'
-C:\Users\Zsombor\Documents\GitHub\Projekt\Jatek\Functions.c(32,12): warning C4098: 'beolvasPalya': 'void' function returning a value
+C:\Users\Zsombor\Documents\GitHub\Projekt\Jatek\Functions.c(14,12): warning C4047: 'return': 'Palya *' differs in levels of indirection from 'int'
+C:\Users\Zsombor\Documents\GitHub\Projekt\Jatek\Functions.c(20,13): warning C4047: 'return': 'Palya *' differs in levels of indirection from 'int'
+C:\Users\Zsombor\Documents\GitHub\Projekt\Jatek\Functions.c(30,12): warning C4098: 'beolvasPalya': 'void' function returning a value
+  Main.c
+  Generating Code...
   Jatek.vcxproj -> C:\Users\Zsombor\Documents\GitHub\Projekt\Jatek\Debug\Jatek.exe

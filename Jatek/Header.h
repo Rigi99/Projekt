@@ -13,7 +13,6 @@ typedef struct Palya {
 	int szel;
 	int hossz;
 	char** palya;
-	char** golyo;
 	int fegyver;
 	int bossElet;
 	int bossX;

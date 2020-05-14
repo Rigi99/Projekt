@@ -32,7 +32,7 @@ int main()
 	}
 	else {
 		system("CLS");
-		printf("Elfogyott a loszer!\nJatek vege!");
+		printf("\nJatek vege!");
 		return -5;
 	}
 	return -5;

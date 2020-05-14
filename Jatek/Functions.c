@@ -9,15 +9,13 @@ Palya* createPalya(const char* fajl) {
 	palya = (Palya*)calloc(1, sizeof(Palya));
 	fscanf(f, "%i%i\n", &palya->hossz, &palya->szel);
 	palya->palya = (char**)calloc(palya->hossz, sizeof(char*));
-	palya->golyo = (char**)calloc(palya->hossz, sizeof(char*));
-	if (!palya->palya || !palya->golyo) {
+	if (!palya->palya) {
 		printf("Sikertelen helyfoglalas!");
 		return -5;
 	}
 	for (int i = 0; i < palya->hossz; ++i) {
 		palya->palya[i] = (char*)calloc(palya->szel, sizeof(char));
-		palya->golyo[i] = (char*)calloc(palya->szel, sizeof(char));
-		if (!palya->palya[i] || !palya->golyo[i]) {
+		if (!palya->palya[i]) {
 			printf("Sikertelen helyfoglalas!");
 			return -5;
 		}
@@ -74,22 +72,22 @@ Palya* jatekMenet(Palya* palya) {
 	palya->fegyver = 0;
 	while (1) {
 		kirajzolPalya(palya);
-		printf("Jobb: d\nLe: s\nBal: a\nFel: w\n");
+		printf("Fel: w\nBal: a\nLe: s\nJobb: d\n");
 		printf("Lovedekek szama: %i", palya->fegyver);
 		char option = getch();
 		elozoX = jatekosX;
 		elozoY = jatekosY;
-		if (option == 'd') {
-			jatekosY++;
-		}
-		if (option == 's') {
-			jatekosX++;
-		}
-		if (option == 'a') {
-			--jatekosY;
-		}
 		if (option == 'w') {
 			--jatekosX;
+		}
+		if (option == 'a') {	
+			--jatekosY;
+		}
+		if (option == 's') {
+			++jatekosX;
+		}
+		if (option == 'd') {
+			++jatekosY;
 		}
 		if (palya->palya[jatekosX][jatekosY] == '0') {
 			palya->palya[jatekosX][jatekosY] = 'P';
@@ -122,6 +120,7 @@ Palya* jatekMenet(Palya* palya) {
 Palya* jatekMenetExtra(Palya* palya) {
 	int elozoX, elozoY;
 	int jatekosX = 1, jatekosY = 1;
+	int golyoX, golyoY;
 	palya->palya[jatekosX][jatekosY] = 'P';
 	palya->bossElet = 4;
 	for (int i = 0; i < palya->hossz; ++i) {
@@ -135,23 +134,24 @@ Palya* jatekMenetExtra(Palya* palya) {
 	int bossX = palya->bossX, bossY = palya->bossY;
 	while (1) {
 		kirajzolPalya(palya);
-		printf("Jobb: d\nLe: s\nBal: a\nFel: w\nLoves: f\n");
+		printf("Fel: w\nBal: a\nLe: s\nJobb: d\nLoves felfele: f\nLoves lefele: l\nLoves jobbra: j\nLoves balra: b\n");
 		printf("Lovedekek szama: %i", palya->fegyver);
 		printf("\nBoss elete: %i\n", palya->bossElet);
 		char option = getch();
 		elozoX = jatekosX;
 		elozoY = jatekosY;
-		if (option == 'd') {
-			jatekosY++;
+		if (option == 'w') {
+			--jatekosX;
+		}
+		if (option == 'a') {
+			
+			--jatekosY;
 		}
 		if (option == 's') {
 			jatekosX++;
 		}
-		if (option == 'a') {
-			--jatekosY;
-		}
-		if (option == 'w') {
-			--jatekosX;
+		if (option == 'd') {
+			jatekosY++;
 		}
 		if (palya->palya[jatekosX][jatekosY] == '0') {
 			palya->palya[jatekosX][jatekosY] = 'P';
@@ -162,22 +162,85 @@ Palya* jatekMenetExtra(Palya* palya) {
 			palya->palya[jatekosX][jatekosY] = 'P';
 			palya->palya[elozoX][elozoY] = '0';
 		}
-		if (option == 'f') {
-			palya->golyo[jatekosX][jatekosY + 1] = '*';
-			kirajzolPalya(palya);
-			system("pause");
-			for (int i = jatekosY + 2; i <= bossY; ++i) {
-				palya->golyo[jatekosX][i] = '*';
+		if (option == 'l') {
+			golyoX = jatekosX + 2;
+			golyoY = jatekosY;
+			while (1) {
+				if (palya->palya[golyoX][golyoY] == '0' || palya->palya[golyoX][golyoY] == '$') {
+					palya->palya[golyoX][golyoY] = '*';
+					palya->palya[elozoX][elozoY] = 'P';
+					palya->palya[golyoX - 1][golyoY] = '0';
+					++golyoX;
+				}
+				system("CLS");
 				kirajzolPalya(palya);
-				system("pause");
-				palya->golyo[jatekosX][i - 1] = '0';
-				//kirajzolPalya(palya);
-				system("CLS");	
+				if (palya->palya[golyoX][golyoY] == 'B') {
+					palya->palya[golyoX - 1][golyoY] = '$';
+					break;
+				}
 			}
-			if (jatekosX == bossX || jatekosY == bossY) {
-				--palya->fegyver;
-				--palya->bossElet;
+			--palya->fegyver;
+			--palya->bossElet;
+		}
+		if (option == 'j') {
+			golyoY = jatekosY + 2;
+			golyoX = jatekosX;
+			while (1) {
+				if (palya->palya[golyoX][golyoY] == '0' || palya->palya[golyoX][golyoY] == '$') {
+					palya->palya[golyoX][golyoY] = '*';
+					palya->palya[elozoX][elozoY] = 'P';
+					palya->palya[golyoX][golyoY - 1] = '0';
+					++golyoY;
+				}
+				system("CLS");
+				kirajzolPalya(palya);
+				if (palya->palya[golyoX][golyoY] == 'B') {
+					palya->palya[golyoX][golyoY - 1] = '$';
+					break;
+				}
 			}
+			--palya->fegyver;
+			--palya->bossElet;
+		}
+		if (option == 'b') {
+			golyoY = jatekosY - 2;
+			golyoX = jatekosX;
+			while (1) {
+				if (palya->palya[golyoX][golyoY] == '0' || palya->palya[golyoX][golyoY] == '$') {
+					palya->palya[golyoX][golyoY] = '*';
+					palya->palya[elozoX][elozoY] = 'P';
+					palya->palya[golyoX][golyoY + 1] = '0';
+					--golyoY;
+				}
+				system("CLS");
+				kirajzolPalya(palya);
+				if (palya->palya[golyoX][golyoY] == 'B') {
+					palya->palya[golyoX][golyoY + 1] = '$';
+					break;
+				}
+			}
+			--palya->fegyver;
+			--palya->bossElet;
+		}
+		if (option == 'f') {
+			golyoX = jatekosX - 2;
+			golyoY = jatekosY;
+			while (1) {
+				if (palya->palya[golyoX][golyoY] == '0' || palya->palya[golyoX][golyoY] == '$') {
+					palya->palya[golyoX][golyoY] = '*';
+					palya->palya[elozoX][elozoY] = 'P';
+					palya->palya[golyoX + 1][golyoY] = '0';
+					--golyoX;
+				}
+				system("CLS");
+				kirajzolPalya(palya);
+				if (palya->palya[golyoX][golyoY] == 'B') {
+					palya->palya[golyoX + 1][golyoY] = '$';
+					break;
+				}
+			}
+			--palya->fegyver;
+			--palya->bossElet;
 		}
 		if (palya->palya[jatekosX][jatekosY] == '1') {
 			palya->b = false;
@@ -191,11 +254,7 @@ Palya* jatekMenetExtra(Palya* palya) {
 			palya->b = false;
 			return palya;
 		}
-		if (palya->palya[jatekosX][jatekosY] == '$') {
-			palya->b = false;
-			return palya;
-		}
-		if (palya->palya[jatekosX][jatekosY] == 'B') {
+		if (palya->palya[jatekosX][jatekosY] == 'A') {
 			palya->b = false;
 			return palya;
 		}
@@ -203,11 +262,7 @@ Palya* jatekMenetExtra(Palya* palya) {
 			palya->b = true;
 			return palya;
 		}
-		if (palya->fegyver == 0 && palya->bossElet != 0) {
-			palya->b = false;
-			return palya;
-		}
-		else if (palya->bossElet == 0) {
+		if (palya->bossElet == 0) {
 			palya->b = true;
 			return palya;
 		}
