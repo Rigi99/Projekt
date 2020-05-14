@@ -24,4 +24,5 @@ void beolvasPalya(const char*, char**);
 void kirajzolPalya(Palya*);
 Palya* jatekMenet(Palya*);
 Palya* jatekMenetExtra(Palya*);
+void kiirSzabalyok();
 #endif

@@ -1,4 +1,4 @@
-#include "Header.h"
+﻿#include "Header.h"
 Palya* createPalya(const char* fajl) {
 	Palya* palya;
 	FILE* f = fopen(fajl, "rt");
@@ -72,7 +72,6 @@ Palya* jatekMenet(Palya* palya) {
 	palya->fegyver = 0;
 	while (1) {
 		kirajzolPalya(palya);
-		printf("Fel: w\nBal: a\nLe: s\nJobb: d\n");
 		printf("Lovedekek szama: %i", palya->fegyver);
 		char option = getch();
 		elozoX = jatekosX;
@@ -93,7 +92,40 @@ Palya* jatekMenet(Palya* palya) {
 			palya->palya[jatekosX][jatekosY] = 'P';
 			palya->palya[elozoX][elozoY] = '0';
 		}
-		if (palya->palya[jatekosX][jatekosY] == 'G' || palya->palya[jatekosX][jatekosY] == 'l') {
+		if (palya->palya[jatekosX][jatekosY] == 'f') {
+			palya->palya[jatekosX][jatekosY] = 'P';
+			palya->palya[elozoX][elozoY] = '0';
+		}
+		if (palya->palya[jatekosX][jatekosY] == 'e') {
+			palya->palya[jatekosX][jatekosY] = 'P';
+			palya->palya[elozoX][elozoY] = '0';
+		}
+		if (palya->palya[jatekosX][jatekosY] == 'g') {
+			palya->palya[jatekosX][jatekosY] = 'P';
+			palya->palya[elozoX][elozoY] = '0';
+		}
+		if (palya->palya[jatekosX][jatekosY] == 'y') {
+			palya->palya[jatekosX][jatekosY] = 'P';
+			palya->palya[elozoX][elozoY] = '0';
+		}
+		if (palya->palya[jatekosX][jatekosY] == 'v') {
+			palya->palya[jatekosX][jatekosY] = 'P';
+			palya->palya[elozoX][elozoY] = '0';
+		}
+		if (palya->palya[jatekosX][jatekosY] == 'e') {
+			palya->palya[jatekosX][jatekosY] = 'P';
+			palya->palya[elozoX][elozoY] = '0';
+		}
+		if (palya->palya[jatekosX][jatekosY] == 'r') {
+			palya->palya[jatekosX][jatekosY] = 'P';
+			palya->palya[elozoX][elozoY] = '0';
+		}
+		if (palya->palya[jatekosX][jatekosY] == 'f') {
+			++palya->fegyver;
+			palya->palya[jatekosX][jatekosY] = 'P';
+			palya->palya[elozoX][elozoY] = '0';
+		}
+		if (palya->palya[jatekosX][jatekosY] == 'G') {
 			++palya->fegyver;
 			palya->palya[jatekosX][jatekosY] = 'P';
 			palya->palya[elozoX][elozoY] = '0';
@@ -134,7 +166,7 @@ Palya* jatekMenetExtra(Palya* palya) {
 	int bossX = palya->bossX, bossY = palya->bossY;
 	while (1) {
 		kirajzolPalya(palya);
-		printf("Fel: w\nBal: a\nLe: s\nJobb: d\nLoves felfele: f\nLoves lefele: l\nLoves jobbra: j\nLoves balra: b\n");
+		printf("Loves felfele: f\nLoves lefele: l\nLoves jobbra: j\nLoves balra: b\n");
 		printf("Lovedekek szama: %i", palya->fegyver);
 		printf("\nBoss elete: %i\n", palya->bossElet);
 		char option = getch();
@@ -154,11 +186,6 @@ Palya* jatekMenetExtra(Palya* palya) {
 			jatekosY++;
 		}
 		if (palya->palya[jatekosX][jatekosY] == '0') {
-			palya->palya[jatekosX][jatekosY] = 'P';
-			palya->palya[elozoX][elozoY] = '0';
-		}
-		if (palya->palya[jatekosX][jatekosY] == 'G' || palya->palya[jatekosX][jatekosY] == 'l') {
-			++palya->fegyver;
 			palya->palya[jatekosX][jatekosY] = 'P';
 			palya->palya[elozoX][elozoY] = '0';
 		}
@@ -268,4 +295,7 @@ Palya* jatekMenetExtra(Palya* palya) {
 		}
 		system("CLS");
 	}
+}
+void kiirSzabalyok() {
+	printf("#Mesterlovesz\nA jatek arrol szol, hogy a jatekos egy celszemelyt keres, akit ki kell iktatni.\nA celszemelyhez elvezeto ut egy labirintus, viszont a labirintusban talalja meg a fegyveret, es a toltenyeket.\nA labirintusok teljesitese utan, a merenylo fel kell jusson egy epulet tetejere, hogy eszrevetlen maradjon.\nA celszemelyt 4 ponton kell eltalalja, ablakokon keresztul, hoy elegendo mereg jusson a szervezetebe.\nHa az osszes lovest sikeresen adta le, vege a jateknak, es a jatekos nyert.	\nAzonban, ha nem az utat koveti, es megprobal nem ures mezore lepni, a jateknak vege.\n\nSzabalyok:\n\t-csak ures mezore lehet lepni\n\t- csak kezvetlenul az ablak(A) melletti mezorol lehet leadni lovest\n\t- a fegyvert, es az osszes golyot be kell gyujteni a masodik palyan\n\t- nem szabad nekimenni semminek\n\t- a labirintus veget a F betu jeloli\n\t- a cmd ablakot ki kell nagyitani\n\t- FONTOS: a Caps Lock legyen kikapcsolva!!!\n");
 }
