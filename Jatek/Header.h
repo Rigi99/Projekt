@@ -18,6 +18,7 @@ typedef struct Palya {
 	int bossX;
 	int bossY;
 	bool b;
+	bool f;
 }Palya;
 Palya* createPalya(const char*);
 void beolvasPalya(const char*, char**);

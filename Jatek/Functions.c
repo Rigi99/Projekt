@@ -53,7 +53,7 @@ void kirajzolPalya(Palya* palya) {
 				printf("|");
 				continue;
 			}
-			if (palya->palya[i][j] == '0') {
+			if (palya->palya[i][j] == '0' || palya->palya[i][j] == 'M') {
 				printf(" ");
 				continue;
 			}
@@ -88,7 +88,7 @@ Palya* jatekMenet(Palya* palya) {
 		if (option == 'd') {
 			++jatekosY;
 		}
-		if (palya->palya[jatekosX][jatekosY] == '0') {
+		if (palya->palya[jatekosX][jatekosY] == '0' || palya->palya[jatekosX][jatekosY] == 'M') {
 			palya->palya[jatekosX][jatekosY] = 'P';
 			palya->palya[elozoX][elozoY] = '0';
 		}
@@ -119,6 +119,7 @@ Palya* jatekMenet(Palya* palya) {
 		if (palya->palya[jatekosX][jatekosY] == 'r') {
 			palya->palya[jatekosX][jatekosY] = 'P';
 			palya->palya[elozoX][elozoY] = '0';
+			palya->f = true;
 		}
 		if (palya->palya[jatekosX][jatekosY] == 'f') {
 			++palya->fegyver;
@@ -164,138 +165,164 @@ Palya* jatekMenetExtra(Palya* palya) {
 		}
 	}
 	int bossX = palya->bossX, bossY = palya->bossY;
-	while (1) {
-		kirajzolPalya(palya);
-		printf("Loves felfele: f\nLoves lefele: l\nLoves jobbra: j\nLoves balra: b\n");
-		printf("Lovedekek szama: %i", palya->fegyver);
-		printf("\nBoss elete: %i\n", palya->bossElet);
-		char option = getch();
-		elozoX = jatekosX;
-		elozoY = jatekosY;
-		if (option == 'w') {
-			--jatekosX;
-		}
-		if (option == 'a') {
-			
-			--jatekosY;
-		}
-		if (option == 's') {
-			jatekosX++;
-		}
-		if (option == 'd') {
-			jatekosY++;
-		}
-		if (palya->palya[jatekosX][jatekosY] == '0') {
-			palya->palya[jatekosX][jatekosY] = 'P';
-			palya->palya[elozoX][elozoY] = '0';
-		}
-		if (option == 'l') {
-			golyoX = jatekosX + 2;
-			golyoY = jatekosY;
-			while (1) {
-				if (palya->palya[golyoX][golyoY] == '0' || palya->palya[golyoX][golyoY] == '$') {
-					palya->palya[golyoX][golyoY] = '*';
-					palya->palya[elozoX][elozoY] = 'P';
-					palya->palya[golyoX - 1][golyoY] = '0';
-					++golyoX;
-				}
-				system("CLS");
-				kirajzolPalya(palya);
-				if (palya->palya[golyoX][golyoY] == 'B') {
-					palya->palya[golyoX - 1][golyoY] = '$';
-					break;
-				}
+	if (palya->f && palya->fegyver != 0) {
+		while (1) {
+			kirajzolPalya(palya);
+			printf("Loves felfele: f\nLoves lefele: l\nLoves jobbra: j\nLoves balra: b\n");
+			printf("Lovedekek szama: %i", palya->fegyver);
+			printf("\nBoss elete: %i\n", palya->bossElet);
+			char option = getch();
+			elozoX = jatekosX;
+			elozoY = jatekosY;
+			if (option == 'w') {
+				--jatekosX;
 			}
-			--palya->fegyver;
-			--palya->bossElet;
-		}
-		if (option == 'j') {
-			golyoY = jatekosY + 2;
-			golyoX = jatekosX;
-			while (1) {
-				if (palya->palya[golyoX][golyoY] == '0' || palya->palya[golyoX][golyoY] == '$') {
-					palya->palya[golyoX][golyoY] = '*';
-					palya->palya[elozoX][elozoY] = 'P';
-					palya->palya[golyoX][golyoY - 1] = '0';
-					++golyoY;
-				}
-				system("CLS");
-				kirajzolPalya(palya);
-				if (palya->palya[golyoX][golyoY] == 'B') {
-					palya->palya[golyoX][golyoY - 1] = '$';
-					break;
-				}
+			if (option == 'a') {
+
+				--jatekosY;
 			}
-			--palya->fegyver;
-			--palya->bossElet;
-		}
-		if (option == 'b') {
-			golyoY = jatekosY - 2;
-			golyoX = jatekosX;
-			while (1) {
-				if (palya->palya[golyoX][golyoY] == '0' || palya->palya[golyoX][golyoY] == '$') {
-					palya->palya[golyoX][golyoY] = '*';
-					palya->palya[elozoX][elozoY] = 'P';
-					palya->palya[golyoX][golyoY + 1] = '0';
-					--golyoY;
-				}
-				system("CLS");
-				kirajzolPalya(palya);
-				if (palya->palya[golyoX][golyoY] == 'B') {
-					palya->palya[golyoX][golyoY + 1] = '$';
-					break;
-				}
+			if (option == 's') {
+				jatekosX++;
 			}
-			--palya->fegyver;
-			--palya->bossElet;
-		}
-		if (option == 'f') {
-			golyoX = jatekosX - 2;
-			golyoY = jatekosY;
-			while (1) {
-				if (palya->palya[golyoX][golyoY] == '0' || palya->palya[golyoX][golyoY] == '$') {
-					palya->palya[golyoX][golyoY] = '*';
-					palya->palya[elozoX][elozoY] = 'P';
-					palya->palya[golyoX + 1][golyoY] = '0';
-					--golyoX;
-				}
-				system("CLS");
-				kirajzolPalya(palya);
-				if (palya->palya[golyoX][golyoY] == 'B') {
-					palya->palya[golyoX + 1][golyoY] = '$';
-					break;
-				}
+			if (option == 'd') {
+				jatekosY++;
 			}
-			--palya->fegyver;
-			--palya->bossElet;
+			if (palya->palya[jatekosX][jatekosY] == '0' || palya->palya[jatekosX][jatekosY] == 'M') {
+				palya->palya[jatekosX][jatekosY] = 'P';
+				palya->palya[elozoX][elozoY] = '0';
+			}
+			if (option == 'l') {
+				golyoX = jatekosX + 2;
+				golyoY = jatekosY;
+				while (1) {
+					if (palya->palya[golyoX][golyoY] == '0' || palya->palya[jatekosX][jatekosY] == 'M' || palya->palya[golyoX][golyoY] == '$') {
+						palya->palya[golyoX][golyoY] = '*';
+						palya->palya[elozoX][elozoY] = 'P';
+						palya->palya[golyoX - 1][golyoY] = '0';
+						++golyoX;
+					}
+					system("CLS");
+					kirajzolPalya(palya);
+					if (palya->palya[golyoX][golyoY] == 'B') {
+						palya->palya[golyoX - 1][golyoY] = '$';
+						--palya->bossElet;
+						break;
+					}
+					if (palya->palya[golyoX][golyoY] == '3' || palya->palya[golyoX][golyoY] == '2') {
+						palya->palya[golyoX - 1][golyoY] = '0';
+						break;
+					}
+				}
+				--palya->fegyver;
+			}
+			if (option == 'j') {
+				golyoY = jatekosY + 2;
+				golyoX = jatekosX;
+				while (1) {
+					if (palya->palya[golyoX][golyoY] == '0' || palya->palya[jatekosX][jatekosY] == 'M' || palya->palya[golyoX][golyoY] == '$') {
+						palya->palya[golyoX][golyoY] = '*';
+						palya->palya[elozoX][elozoY] = 'P';
+						palya->palya[golyoX][golyoY - 1] = '0';
+						++golyoY;
+					}
+					system("CLS");
+					kirajzolPalya(palya);
+					if (palya->palya[golyoX][golyoY] == 'B') {
+						palya->palya[golyoX][golyoY - 1] = '$';
+						--palya->bossElet;
+						break;
+					}
+					if (palya->palya[golyoX][golyoY] == '1' || palya->palya[golyoX][golyoY] == '2') {
+						palya->palya[golyoX][golyoY - 1] = '0';
+						break;
+					}
+				}
+				--palya->fegyver;
+			}
+			if (option == 'b') {
+				golyoY = jatekosY - 2;
+				golyoX = jatekosX;
+				while (1) {
+					if (palya->palya[golyoX][golyoY] == '0' || palya->palya[jatekosX][jatekosY] == 'M' || palya->palya[golyoX][golyoY] == '$') {
+						palya->palya[golyoX][golyoY] = '*';
+						palya->palya[elozoX][elozoY] = 'P';
+						palya->palya[golyoX][golyoY + 1] = '0';
+						--golyoY;
+					}
+					system("CLS");
+					kirajzolPalya(palya);
+					if (palya->palya[golyoX][golyoY] == 'B') {
+						palya->palya[golyoX][golyoY + 1] = '$';
+						--palya->bossElet;
+						break;
+					}
+					if (palya->palya[golyoX][golyoY] == '1' || palya->palya[golyoX][golyoY] == '2') {
+						palya->palya[golyoX][golyoY + 1] = '0';
+						break;
+					}
+				}
+				--palya->fegyver;
+			}
+			if (option == 'f') {
+				golyoX = jatekosX - 2;
+				golyoY = jatekosY;
+				while (1) {
+					if (palya->palya[golyoX][golyoY] == '0' || palya->palya[jatekosX][jatekosY] == 'M' || palya->palya[golyoX][golyoY] == '$') {
+						palya->palya[golyoX][golyoY] = '*';
+						palya->palya[elozoX][elozoY] = 'P';
+						palya->palya[golyoX + 1][golyoY] = '0';
+						--golyoX;
+					}
+					system("CLS");
+					kirajzolPalya(palya);
+					if (palya->palya[golyoX][golyoY] == 'B') {
+						palya->palya[golyoX + 1][golyoY] = '$';
+						--palya->bossElet;
+						break;
+					}
+					if (palya->palya[golyoX][golyoY] == '3' || palya->palya[golyoX][golyoY] == '2') {
+						palya->palya[golyoX + 1][golyoY] = '0';
+						break;
+					}
+				}
+				--palya->fegyver;
+			}
+			if (palya->palya[jatekosX][jatekosY] == '1') {
+				palya->b = false;
+				return palya;
+			}
+			if (palya->palya[jatekosX][jatekosY] == '2') {
+				palya->b = false;
+				return palya;
+			}
+			if (palya->palya[jatekosX][jatekosY] == '3') {
+				palya->b = false;
+				return palya;
+			}
+			if (palya->palya[jatekosX][jatekosY] == 'A') {
+				palya->b = false;
+				return palya;
+			}
+			if (palya->palya[jatekosX][jatekosY] == 'F') {
+				palya->b = true;
+				return palya;
+			}
+			if (palya->fegyver == 0) {
+				palya->b = false;
+				return palya;
+			}
+			if (palya->bossElet == 0) {
+				palya->b = true;
+				return palya;
+			}
+			system("CLS");
 		}
-		if (palya->palya[jatekosX][jatekosY] == '1') {
-			palya->b = false;
-			return palya;
-		}
-		if (palya->palya[jatekosX][jatekosY] == '2') {
-			palya->b = false;
-			return palya;
-		}
-		if (palya->palya[jatekosX][jatekosY] == '3') {
-			palya->b = false;
-			return palya;
-		}
-		if (palya->palya[jatekosX][jatekosY] == 'A') {
-			palya->b = false;
-			return palya;
-		}
-		if (palya->palya[jatekosX][jatekosY] == 'F') {
-			palya->b = true;
-			return palya;
-		}
-		if (palya->bossElet == 0) {
-			palya->b = true;
-			return palya;
-		}
-		system("CLS");
+	}
+	else {
+	palya->b = false;
+	return palya;
 	}
 }
 void kiirSzabalyok() {
-	printf("#Mesterlovesz\nA jatek arrol szol, hogy a jatekos egy celszemelyt keres, akit ki kell iktatni.\nA celszemelyhez elvezeto ut egy labirintus, viszont a labirintusban talalja meg a fegyveret, es a toltenyeket.\nA labirintusok teljesitese utan, a merenylo fel kell jusson egy epulet tetejere, hogy eszrevetlen maradjon.\nA celszemelyt 4 ponton kell eltalalja, ablakokon keresztul, hoy elegendo mereg jusson a szervezetebe.\nHa az osszes lovest sikeresen adta le, vege a jateknak, es a jatekos nyert.	\nAzonban, ha nem az utat koveti, es megprobal nem ures mezore lepni, a jateknak vege.\n\nSzabalyok:\n\t-csak ures mezore lehet lepni\n\t- csak kezvetlenul az ablak(A) melletti mezorol lehet leadni lovest\n\t- a fegyvert, es az osszes golyot be kell gyujteni a masodik palyan\n\t- nem szabad nekimenni semminek\n\t- a labirintus veget a F betu jeloli\n\t- a cmd ablakot ki kell nagyitani\n\t- FONTOS: a Caps Lock legyen kikapcsolva!!!\n");
+	printf("#Mesterlovesz\nA jatek arrol szol, hogy a jatekos egy celszemelyt keres, akit ki kell iktatni.\nA celszemelyhez elvezeto ut egy labirintus, viszont a labirintusban talalja meg a fegyveret, es a toltenyeket.\nA labirintusok teljesitese utan, a merenylo fel kell jusson egy epulet tetejere, hogy eszrevetlen maradjon.\nA celszemelyt 4 ponton kell eltalalja, ablakokon keresztul, hoy elegendo mereg jusson a szervezetebe.\nHa az osszes lovest sikeresen adta le, vege a jateknak, es a jatekos nyert.	\nAzonban, ha nem az utat koveti, es megprobal nem ures mezore lepni, a jateknak vege.\n\nSzabalyok:\n\t-csak ures mezore lehet lepni\n\t- csak kezvetlenul az ablak(A) melletti mezorol lehet leadni lovest\n\t- a fegyvert(fegyver), es az osszes golyot(G) be kell gyujteni a masodik palyan, kulonben nem sikerulhet\n\t- nem szabad nekimenni semminek\n\t- a labirintus veget a F betu jeloli\n\t- a cmd ablakot ki kell nagyitani\n\t- FONTOS: a Caps Lock legyen kikapcsolva!!!\n");
 }
