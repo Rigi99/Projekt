@@ -68,82 +68,78 @@ void kirajzolPalya(Palya* palya) {
 Palya* jatekMenet(Palya* palya) {
 	int elozoX, elozoY;
 	int jatekosX = 1, jatekosY = 1;
-	palya->palya[jatekosX][jatekosY] = 'P';
+	palya->palya[jatekosX][jatekosY] = 'P'; //elhelyezi a jatekost a palyan
 	palya->fegyver = 0;
 	while (1) {
 		kirajzolPalya(palya);
 		printf("Lovedekek szama: %i", palya->fegyver);
-		char option = getch();
+		char option = getch(); //lepes bekerese
 		elozoX = jatekosX;
 		elozoY = jatekosY;
-		if (option == 'w') {
+		if (option == 'w') { //lepes kiertekelese
 			--jatekosX;
 		}
-		if (option == 'a') {	
+		if (option == 'a') { //lepes kiertekelese
 			--jatekosY;
 		}
-		if (option == 's') {
+		if (option == 's') { //lepes kiertekelese
 			++jatekosX;
 		}
-		if (option == 'd') {
+		if (option == 'd') { //lepes kiertekelese
 			++jatekosY;
 		}
-		if (palya->palya[jatekosX][jatekosY] == '0' || palya->palya[jatekosX][jatekosY] == 'M') {
+		if (palya->palya[jatekosX][jatekosY] == '0' || palya->palya[jatekosX][jatekosY] == 'M') { //lepes 
 			palya->palya[jatekosX][jatekosY] = 'P';
 			palya->palya[elozoX][elozoY] = '0';
 		}
-		if (palya->palya[jatekosX][jatekosY] == 'f') {
+		if (palya->palya[jatekosX][jatekosY] == 'f') { //lepes fegyver felvetele
 			palya->palya[jatekosX][jatekosY] = 'P';
 			palya->palya[elozoX][elozoY] = '0';
 		}
-		if (palya->palya[jatekosX][jatekosY] == 'e') {
+		if (palya->palya[jatekosX][jatekosY] == 'e') { //lepes fegyver felvetele
+			palya->palya[jatekosX][jatekosY] = 'P';
+			palya->palya[elozoX][elozoY] = '0';
+		} 
+		if (palya->palya[jatekosX][jatekosY] == 'g') { //lepes fegyver felvetele
 			palya->palya[jatekosX][jatekosY] = 'P';
 			palya->palya[elozoX][elozoY] = '0';
 		}
-		if (palya->palya[jatekosX][jatekosY] == 'g') {
+		if (palya->palya[jatekosX][jatekosY] == 'y') { //lepes fegyver felvetele
 			palya->palya[jatekosX][jatekosY] = 'P';
 			palya->palya[elozoX][elozoY] = '0';
 		}
-		if (palya->palya[jatekosX][jatekosY] == 'y') {
+		if (palya->palya[jatekosX][jatekosY] == 'v') { //lepes fegyver felvetele
 			palya->palya[jatekosX][jatekosY] = 'P';
 			palya->palya[elozoX][elozoY] = '0';
 		}
-		if (palya->palya[jatekosX][jatekosY] == 'v') {
+		if (palya->palya[jatekosX][jatekosY] == 'e') { //lepes fegyver felvetele
 			palya->palya[jatekosX][jatekosY] = 'P';
 			palya->palya[elozoX][elozoY] = '0';
 		}
-		if (palya->palya[jatekosX][jatekosY] == 'e') {
+		if (palya->palya[jatekosX][jatekosY] == 'r') { //lepes fegyver felvetele
 			palya->palya[jatekosX][jatekosY] = 'P';
 			palya->palya[elozoX][elozoY] = '0';
-		}
-		if (palya->palya[jatekosX][jatekosY] == 'r') {
-			palya->palya[jatekosX][jatekosY] = 'P';
-			palya->palya[elozoX][elozoY] = '0';
+			++palya->fegyver;
 			palya->f = true;
 		}
-		if (palya->palya[jatekosX][jatekosY] == 'f') {
+		if (palya->palya[jatekosX][jatekosY] == 'G') { //lepes golyo felvetele
 			++palya->fegyver;
 			palya->palya[jatekosX][jatekosY] = 'P';
 			palya->palya[elozoX][elozoY] = '0';
 		}
-		if (palya->palya[jatekosX][jatekosY] == 'G') {
-			++palya->fegyver;
-			palya->palya[jatekosX][jatekosY] = 'P';
-			palya->palya[elozoX][elozoY] = '0';
-		}
-		if (palya->palya[jatekosX][jatekosY] == '1') {
+		if (palya->palya[jatekosX][jatekosY] == '1') { //falnak utkozes
 			palya->b = false;
 			return palya;
 		}
-		if (palya->palya[jatekosX][jatekosY] == '2') {
+		if (palya->palya[jatekosX][jatekosY] == '2') { //falnak utkozes
 			palya->b = false;
 			return palya;
 		}
-		if (palya->palya[jatekosX][jatekosY] == '3') {
+		if (palya->palya[jatekosX][jatekosY] == '3') { //falnak utkozes
 			palya->b = false;
 			return palya;
 		}
-		if (palya->palya[jatekosX][jatekosY] == 'F') {
+		if (palya->palya[jatekosX][jatekosY] == 'F') { //celba eres
 			palya->b = true;
 			return palya;
 		}
@@ -191,7 +187,7 @@ Palya* jatekMenetExtra(Palya* palya) {
 				palya->palya[jatekosX][jatekosY] = 'P';
 				palya->palya[elozoX][elozoY] = '0';
 			}
-			if (option == 'l') {
+			if (option == 'l') { //golyo pozicioba helyezese es loves
 				golyoX = jatekosX + 2;
 				golyoY = jatekosY;
 				while (1) {
@@ -215,7 +211,7 @@ Palya* jatekMenetExtra(Palya* palya) {
 				}
 				--palya->fegyver;
 			}
-			if (option == 'j') {
+			if (option == 'j') { //golyo pozicioba helyezese es loves
 				golyoY = jatekosY + 2;
 				golyoX = jatekosX;
 				while (1) {
@@ -239,7 +235,7 @@ Palya* jatekMenetExtra(Palya* palya) {
 				}
 				--palya->fegyver;
 			}
-			if (option == 'b') {
+			if (option == 'b') { //golyo pozicioba helyezese es loves
 				golyoY = jatekosY - 2;
 				golyoX = jatekosX;
 				while (1) {
@@ -263,7 +259,7 @@ Palya* jatekMenetExtra(Palya* palya) {
 				}
 				--palya->fegyver;
 			}
-			if (option == 'f') {
+			if (option == 'f') { //golyo pozicioba helyezese es loves
 				golyoX = jatekosX - 2;
 				golyoY = jatekosY;
 				while (1) {
